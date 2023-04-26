@@ -1,0 +1,15 @@
+C:\Users\gaonar\source\repos\MinTrabajo\MinTrabajo.Datos\bin\Debug\net6.0\MinTrabajo.Datos.deps.json
+C:\Users\gaonar\source\repos\MinTrabajo\MinTrabajo.Datos\bin\Debug\net6.0\MinTrabajo.Datos.dll
+C:\Users\gaonar\source\repos\MinTrabajo\MinTrabajo.Datos\bin\Debug\net6.0\MinTrabajo.Datos.pdb
+C:\Users\gaonar\source\repos\MinTrabajo\MinTrabajo.Datos\bin\Debug\net6.0\MinTrabajo.Dominio.dll
+C:\Users\gaonar\source\repos\MinTrabajo\MinTrabajo.Datos\bin\Debug\net6.0\MinTrabajo.Dominio.pdb
+C:\Users\gaonar\source\repos\MinTrabajo\MinTrabajo.Datos\obj\Debug\net6.0\MinTrabajo.Datos.csproj.AssemblyReference.cache
+C:\Users\gaonar\source\repos\MinTrabajo\MinTrabajo.Datos\obj\Debug\net6.0\MinTrabajo.Datos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gaonar\source\repos\MinTrabajo\MinTrabajo.Datos\obj\Debug\net6.0\MinTrabajo.Datos.AssemblyInfoInputs.cache
+C:\Users\gaonar\source\repos\MinTrabajo\MinTrabajo.Datos\obj\Debug\net6.0\MinTrabajo.Datos.AssemblyInfo.cs
+C:\Users\gaonar\source\repos\MinTrabajo\MinTrabajo.Datos\obj\Debug\net6.0\MinTrabajo.Datos.csproj.CoreCompileInputs.cache
+C:\Users\gaonar\source\repos\MinTrabajo\MinTrabajo.Datos\obj\Debug\net6.0\MinTrabajo.Datos.csproj.CopyComplete
+C:\Users\gaonar\source\repos\MinTrabajo\MinTrabajo.Datos\obj\Debug\net6.0\MinTrabajo.Datos.dll
+C:\Users\gaonar\source\repos\MinTrabajo\MinTrabajo.Datos\obj\Debug\net6.0\refint\MinTrabajo.Datos.dll
+C:\Users\gaonar\source\repos\MinTrabajo\MinTrabajo.Datos\obj\Debug\net6.0\MinTrabajo.Datos.pdb
+C:\Users\gaonar\source\repos\MinTrabajo\MinTrabajo.Datos\obj\Debug\net6.0\ref\MinTrabajo.Datos.dll

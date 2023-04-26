@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "MinTrabajo.Dominio/1.0.0": {
+        "runtime": {
+          "MinTrabajo.Dominio.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MinTrabajo.Dominio/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
