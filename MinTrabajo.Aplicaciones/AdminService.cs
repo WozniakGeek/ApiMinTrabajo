@@ -11,10 +11,10 @@ namespace MinTrabajo.Aplicaciones
     public class AdminService
     {
 
-        private readonly IAdminRepository<CriterioModel, string> IAdminRepo;
+        private readonly IAdminRepository IAdminRepo;
 
 
-        public AdminService(IAdminRepository<CriterioModel, string> _adminRepo)
+        public AdminService(IAdminRepository _adminRepo)
         {
             IAdminRepo = _adminRepo;
         }
@@ -24,6 +24,19 @@ namespace MinTrabajo.Aplicaciones
             try
             {
                 List<CriterioModel> model = IAdminRepo.GetCriterios();
+                return model;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool UpdateCriterios( List<RequestUpdateAtributte> atributteS)
+        {
+            try
+            {
+                bool model = IAdminRepo.UpdateCriterios(atributteS);
                 return model;
             }
             catch (Exception)

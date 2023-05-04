@@ -25,7 +25,7 @@ namespace MinTrabajo.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("GetListPrestadores")]
-        public ActionResult GetListPrestadores()
+        public ActionResult<ResponseModel> GetListPrestadores()
         {
             ResponseModel response = new();
             List<ListModel> result = new();
@@ -50,7 +50,7 @@ namespace MinTrabajo.Controllers
 
         [HttpGet]
         [Route("GetListSedes")]
-        public ActionResult GetListSedes()
+        public ActionResult<ResponseModel> GetListSedes()
         {
             ResponseModel response = new();
             List<ListModel> result = new();
@@ -74,7 +74,7 @@ namespace MinTrabajo.Controllers
 
         [HttpGet]
         [Route("GetListStatus")]
-        public ActionResult GetListStatus()
+        public ActionResult<ResponseModel> GetListStatus()
         {
             ResponseModel response = new();
             List<ListModel> result = new();
@@ -94,7 +94,7 @@ namespace MinTrabajo.Controllers
 
         [HttpGet]
         [Route("GetListCriterios")]
-        public ActionResult GetListCriterios()
+        public ActionResult<ResponseModel> GetListCriterios()
         {
             ResponseModel response = new();
             List<ListModel> result = new();

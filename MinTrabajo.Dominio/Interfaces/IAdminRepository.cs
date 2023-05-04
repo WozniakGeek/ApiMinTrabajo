@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MinTrabajo.Dominio.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace MinTrabajo.Dominio.Interfaces
 {
-    public interface IAdminRepository<TEntityList, TMsg>
+    public interface IAdminRepository
     {
-        List<TEntityList> GetCriterios();
+        List<CriterioModel> GetCriterios();
+
+        bool UpdateCriterios(List<RequestUpdateAtributte> atributtes);
     }
 }

@@ -3,6 +3,7 @@ using MinTrabajo.Dominio.Interfaces;
 using MinTrabajo.Dominio.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MinTrabajo.Datos.Repositories
 {
-    public class AdminRepository : IAdminRepository<CriterioModel, string>
+    public class AdminRepository : IAdminRepository
     {
 
         private readonly MinTra_Context db;
@@ -38,10 +39,10 @@ namespace MinTrabajo.Datos.Repositories
 
                             ListCriterios.Add(new CriterioModel
                             {
-                                VariableId = reader.GetInt32(0),                                       
+                                VariableId = reader.GetInt32(0),
                                 PesoDefault = reader.GetDecimal(4),
-                                NombreEstado = reader.GetInt32(9),                                
-                                FechaCreacion = reader.GetString(6),                                
+                                NombreEstado = reader.GetInt32(9),
+                                FechaCreacion = reader.GetString(6),
                                 FechaModificacion = reader.GetString(8),
 
                             });
@@ -58,6 +59,49 @@ namespace MinTrabajo.Datos.Repositories
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        public bool UpdateCriterios(List<RequestUpdateAtributte> atributtes)
+        {
+            var flag = false;
+            try
+            {
+                var NewAtributtes = atributtes;
+                SqlConnectionStringBuilder dbContext = db.DBContext();
+                using SqlConnection connection = new(dbContext.ConnectionString);
+                {
+                    foreach (var i in NewAtributtes)
+                    {
+                        connection.Open();
+
+                        using (SqlCommand cmd = new("SP_UPDATE_CRITERIOS", connection))
+                        {
+
+                            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                            cmd.Parameters.Add(new SqlParameter("@variableId", i.atributte));
+                            cmd.Parameters.Add(new SqlParameter("@user", i.User));
+                            cmd.Parameters.Add(new SqlParameter("@peso", i.weight));
+                            cmd.Parameters.Add(new SqlParameter("@estado", i.status));
+                            var reader = cmd.ExecuteReader();
+
+                            while (reader.Read())
+                            {
+
+                            }
+                        }
+                        connection.Close();
+                    }
+                    flag = true;
+
+                }
+                return flag;
+            }
+
+            catch (Exception ex)
+            {
+                flag = false;
                 throw;
             }
         }

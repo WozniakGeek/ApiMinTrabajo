@@ -10,7 +10,7 @@ namespace MinTrabajo.Controllers
     [ApiController]
     public class AdminController : Controller
     {
-        private AdminService CrearServicio()
+        private AdminService CreateService()
         {
             MinTra_Context db = new();
             AdminRepository repo = new(db);
@@ -27,7 +27,7 @@ namespace MinTrabajo.Controllers
             List<CriterioModel> result = new();
             try
             {
-                var servicio = CrearServicio();
+                var servicio = CreateService();
                 result = servicio.GetCriterios();
             }
             catch (Exception ex)
@@ -40,26 +40,48 @@ namespace MinTrabajo.Controllers
         }
 
         /// <summary>
-        /// Metodo para editar criterios
+        /// Metodo para editar criterios desde administrador
         /// </summary>
         /// <returns></returns>
 
-        [HttpPost]
-        [Route("EditionCriterion")]
+        [HttpPut]
+        [Route("UpdateCriterios")]
 
-        public ActionResult EditionCriterion()
+        public ActionResult UpdateCriterion([FromBody] RequestAtributteModel requestAtributte)
         {
+
+
             ResponseModel response = new();
             try
             {
+                var requestUpdateAtributte = new List<RequestUpdateAtributte>();                
+                foreach (var i in requestAtributte.atributtes)
+                {
 
+                    requestUpdateAtributte.Add(new RequestUpdateAtributte
+                    {
+                        User = requestAtributte.User,
+                        status = i.status,
+                        atributte = i.atributte,
+                        weight = i.weight
+
+                    });
+
+                }
+                var service = CreateService();
+                var result = service.UpdateCriterios(requestUpdateAtributte);
+                if (!result)
+                {
+                    response.Mensaje = "Error al actualizar los criterios ";
+                    response.IsValid = false;
+                }
             }
             catch (Exception ex)
             {
                 response.Mensaje = ex.Message;
                 response.IsValid = false;
             }
-            //response.ObjetoRespuesta = result;
+            
             return Ok(response);
         }
     }
