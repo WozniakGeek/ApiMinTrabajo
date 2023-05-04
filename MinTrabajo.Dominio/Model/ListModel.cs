@@ -9,6 +9,6 @@ namespace MinTrabajo.Dominio.Model
     public class ListModel
     {
         public int Id { get; set; }
-        public string Nombre { get; set; }
+        public string? Nombre { get; set; }
     }
 }

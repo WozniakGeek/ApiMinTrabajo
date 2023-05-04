@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "oCE8oodg/5M4iKSyU2IgoUupAKa/vj0wQARIxYVppKf/tHpO7XanwLlXGf7I8pYyfDG4fJveU8MEVZD1nfxOtw==",
+  "dgSpecHash": "ebcDZbuqRlxP6kET8I95nz8Gaxpxq/O1DvuXIJoZV3/4ZraEzMaaNdAao4CehKTdG9SK9WSn7Vomm1PtrpP1ng==",
   "success": true,
-  "projectFilePath": "C:\\Users\\gaonar\\source\\repos\\MinTrabajo\\MinTrabajo\\MinTrabajo.csproj",
+  "projectFilePath": "D:\\GIT\\ApiMinTrabajo\\MinTrabajo\\MinTrabajo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gaonar\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\gaonar\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",

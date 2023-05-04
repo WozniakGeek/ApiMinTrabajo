@@ -72,25 +72,45 @@ namespace MinTrabajo.Controllers
         /// </summary>
         /// <returns></returns>
 
-        //[HttpGet]
-        //[Route("GetListStatus")]
-        //public ActionResult GetListStatus()
-        //{
-        //    ResponseModel response = new();
-        //    List<ListModel> result = new();
-        //    try
-        //    {
-        //        var servicio = CrearServicio();
-        //        result = servicio.GetAllListStatus();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        response.Mensaje = ex.Message;
-        //        response.IsValid = false;
-        //    }
-        //    response.ObjetoRespuesta = result;
-        //    return Ok(response);
-        //}
+        [HttpGet]
+        [Route("GetListStatus")]
+        public ActionResult GetListStatus()
+        {
+            ResponseModel response = new();
+            List<ListModel> result = new();
+            try
+            {
+                var servicio = CrearServicio();
+                result = servicio.GetAllListStatus();
+            }
+            catch (Exception ex)
+            {
+                response.Mensaje = ex.Message;
+                response.IsValid = false;
+            }
+            response.ObjetoRespuesta = result;
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("GetListCriterios")]
+        public ActionResult GetListCriterios()
+        {
+            ResponseModel response = new();
+            List<ListModel> result = new();
+            try
+            {
+                var service = CrearServicio();
+                result = service.GetAllListCriterios();
+            }
+            catch (Exception ex)
+            {
+                response.Mensaje = ex.Message;
+                response.IsValid = false;
+            }
+            response.ObjetoRespuesta = result;
+            return Ok(response);
+        }
 
     }
 }

@@ -11,6 +11,8 @@ namespace MinTrabajo.Dominio.Interfaces
         List<TEntityList> GetListPrestadores();
         List<TEntityList> GetListSedes();
         List<TEntityList> GetListStatus();
+        List<TEntityList> GetListCriterios();
+
 
         //TMsg PostAdminCIF(TEntityReq entityReq);
     }

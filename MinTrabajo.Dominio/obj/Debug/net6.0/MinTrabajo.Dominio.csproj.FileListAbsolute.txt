@@ -10,3 +10,15 @@ C:\Users\gaonar\source\repos\MinTrabajo\MinTrabajo.Dominio\obj\Debug\net6.0\MinT
 C:\Users\gaonar\source\repos\MinTrabajo\MinTrabajo.Dominio\obj\Debug\net6.0\refint\MinTrabajo.Dominio.dll
 C:\Users\gaonar\source\repos\MinTrabajo\MinTrabajo.Dominio\obj\Debug\net6.0\MinTrabajo.Dominio.pdb
 C:\Users\gaonar\source\repos\MinTrabajo\MinTrabajo.Dominio\obj\Debug\net6.0\ref\MinTrabajo.Dominio.dll
+D:\GIT\ApiMinTrabajo\MinTrabajo.Dominio\bin\Debug\net6.0\MinTrabajo.Dominio.deps.json
+D:\GIT\ApiMinTrabajo\MinTrabajo.Dominio\bin\Debug\net6.0\MinTrabajo.Dominio.dll
+D:\GIT\ApiMinTrabajo\MinTrabajo.Dominio\bin\Debug\net6.0\MinTrabajo.Dominio.pdb
+D:\GIT\ApiMinTrabajo\MinTrabajo.Dominio\obj\Debug\net6.0\MinTrabajo.Dominio.csproj.AssemblyReference.cache
+D:\GIT\ApiMinTrabajo\MinTrabajo.Dominio\obj\Debug\net6.0\MinTrabajo.Dominio.GeneratedMSBuildEditorConfig.editorconfig
+D:\GIT\ApiMinTrabajo\MinTrabajo.Dominio\obj\Debug\net6.0\MinTrabajo.Dominio.AssemblyInfoInputs.cache
+D:\GIT\ApiMinTrabajo\MinTrabajo.Dominio\obj\Debug\net6.0\MinTrabajo.Dominio.AssemblyInfo.cs
+D:\GIT\ApiMinTrabajo\MinTrabajo.Dominio\obj\Debug\net6.0\MinTrabajo.Dominio.csproj.CoreCompileInputs.cache
+D:\GIT\ApiMinTrabajo\MinTrabajo.Dominio\obj\Debug\net6.0\MinTrabajo.Dominio.dll
+D:\GIT\ApiMinTrabajo\MinTrabajo.Dominio\obj\Debug\net6.0\refint\MinTrabajo.Dominio.dll
+D:\GIT\ApiMinTrabajo\MinTrabajo.Dominio\obj\Debug\net6.0\MinTrabajo.Dominio.pdb
+D:\GIT\ApiMinTrabajo\MinTrabajo.Dominio\obj\Debug\net6.0\ref\MinTrabajo.Dominio.dll

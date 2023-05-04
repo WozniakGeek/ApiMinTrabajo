@@ -22,7 +22,7 @@ namespace MinTrabajo.Datos.Repositories
         public List<ListModel> GetListPrestadores()
         {
             var ListPrestadores = new List<ListModel>();
-            string? mensajeSP = "";
+           
             try
             {
                 SqlConnectionStringBuilder dbContext = db.DBContext();
@@ -56,7 +56,7 @@ namespace MinTrabajo.Datos.Repositories
         public List<ListModel> GetListSedes()
         {
             var ListSedes = new List<ListModel>();
-            string? mensajeSP = "";
+            //string? mensajeSP = "";
             try
             {
                 SqlConnectionStringBuilder dbContext = db.DBContext();
@@ -90,7 +90,7 @@ namespace MinTrabajo.Datos.Repositories
         public List<ListModel> GetListStatus()
         {
             var ListStatus = new List<ListModel>();
-            string? mensajeSP = "";
+            //string? mensajeSP = "";
             try
             {
                 SqlConnectionStringBuilder dbContext = db.DBContext();
@@ -122,6 +122,50 @@ namespace MinTrabajo.Datos.Repositories
                 return ListStatus;
 
               
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public List<ListModel> GetListCriterios()
+        {
+            var ListStatus = new List<ListModel>();
+            //string? mensajeSP = "";
+            try
+            {
+                SqlConnectionStringBuilder dbContext = db.DBContext();
+                using SqlConnection connection = new(dbContext.ConnectionString);
+                {
+
+                    connection.Open();
+                    using (SqlCommand cmd = new("SP_GET_ONLY_CRITERIOS", connection))
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        var reader = cmd.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+
+                            ListStatus.Add(new ListModel
+                            {
+                                Id = reader.GetInt32(0),
+                                Nombre = reader.GetString(1),
+                            });
+                        }
+
+
+                    }
+                    connection.Close();
+
+
+                }
+                return ListStatus;
+
+
             }
             catch (Exception)
             {

@@ -58,5 +58,18 @@ namespace MinTrabajo.Aplicaciones
             }
         }
 
+        public List<ListModel> GetAllListCriterios()
+        {
+            try
+            {
+                List<ListModel> model = ListFormRepo.GetListCriterios();
+                return model;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }
