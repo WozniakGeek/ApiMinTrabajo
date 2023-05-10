@@ -1,0 +1,17 @@
+D:\GIT\ApiMinTrabajo\MinTrabajo.Aplicaciones\bin\Release\net6.0\MinTrabajo.Aplicaciones.deps.json
+D:\GIT\ApiMinTrabajo\MinTrabajo.Aplicaciones\bin\Release\net6.0\MinTrabajo.Aplicaciones.dll
+D:\GIT\ApiMinTrabajo\MinTrabajo.Aplicaciones\bin\Release\net6.0\MinTrabajo.Aplicaciones.pdb
+D:\GIT\ApiMinTrabajo\MinTrabajo.Aplicaciones\bin\Release\net6.0\MinTrabajo.Datos.dll
+D:\GIT\ApiMinTrabajo\MinTrabajo.Aplicaciones\bin\Release\net6.0\MinTrabajo.Dominio.dll
+D:\GIT\ApiMinTrabajo\MinTrabajo.Aplicaciones\bin\Release\net6.0\MinTrabajo.Datos.pdb
+D:\GIT\ApiMinTrabajo\MinTrabajo.Aplicaciones\bin\Release\net6.0\MinTrabajo.Dominio.pdb
+D:\GIT\ApiMinTrabajo\MinTrabajo.Aplicaciones\obj\Release\net6.0\MinTrabajo.Aplicaciones.csproj.AssemblyReference.cache
+D:\GIT\ApiMinTrabajo\MinTrabajo.Aplicaciones\obj\Release\net6.0\MinTrabajo.Aplicaciones.GeneratedMSBuildEditorConfig.editorconfig
+D:\GIT\ApiMinTrabajo\MinTrabajo.Aplicaciones\obj\Release\net6.0\MinTrabajo.Aplicaciones.AssemblyInfoInputs.cache
+D:\GIT\ApiMinTrabajo\MinTrabajo.Aplicaciones\obj\Release\net6.0\MinTrabajo.Aplicaciones.AssemblyInfo.cs
+D:\GIT\ApiMinTrabajo\MinTrabajo.Aplicaciones\obj\Release\net6.0\MinTrabajo.Aplicaciones.csproj.CoreCompileInputs.cache
+D:\GIT\ApiMinTrabajo\MinTrabajo.Aplicaciones\obj\Release\net6.0\MinTrabajo.Aplicaciones.csproj.CopyComplete
+D:\GIT\ApiMinTrabajo\MinTrabajo.Aplicaciones\obj\Release\net6.0\MinTrabajo.Aplicaciones.dll
+D:\GIT\ApiMinTrabajo\MinTrabajo.Aplicaciones\obj\Release\net6.0\refint\MinTrabajo.Aplicaciones.dll
+D:\GIT\ApiMinTrabajo\MinTrabajo.Aplicaciones\obj\Release\net6.0\MinTrabajo.Aplicaciones.pdb
+D:\GIT\ApiMinTrabajo\MinTrabajo.Aplicaciones\obj\Release\net6.0\ref\MinTrabajo.Aplicaciones.dll

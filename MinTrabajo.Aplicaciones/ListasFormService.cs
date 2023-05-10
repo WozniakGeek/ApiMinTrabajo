@@ -10,20 +10,20 @@ namespace MinTrabajo.Aplicaciones
 {
     public class ListasFormService
     {
-        private readonly IListFormRepository<ListModel, string> ListFormRepo;
+        private readonly IListFormRepository ListFormRepo;
 
 
-        public ListasFormService(IListFormRepository<ListModel, string> _listFormRepo)
+        public ListasFormService(IListFormRepository _listFormRepo)
         {
             ListFormRepo = _listFormRepo;
         }
 
 
-        public List<ListModel> GetAllListPrestadores()
+        public List<ListModel2> GetAllListPrestadores()
         {
             try
             {
-                List<ListModel> model = ListFormRepo.GetListPrestadores();
+                List<ListModel2> model = ListFormRepo.GetListPrestadores();
                 return model;
             }
             catch (Exception)
@@ -32,11 +32,11 @@ namespace MinTrabajo.Aplicaciones
             }
         }
 
-        public List<ListModel> GetAllListSedes()
+        public List<ListModel> GetAllListSedes(int PrestadorId)
         {
             try
             {
-                List<ListModel> model = ListFormRepo.GetListSedes();
+                List<ListModel> model = ListFormRepo.GetListSedes(PrestadorId);
                 return model;
             }
             catch (Exception)

@@ -11,4 +11,10 @@ namespace MinTrabajo.Dominio.Model
         public int Id { get; set; }
         public string? Nombre { get; set; }
     }
+
+    public class ListModel2
+    {
+        public Guid Id { get; set; }
+        public string? Nombre { get; set; }
+    }
 }

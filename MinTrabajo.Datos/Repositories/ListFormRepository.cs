@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 
 namespace MinTrabajo.Datos.Repositories
 {
-    public class ListFormRepository : IListFormRepository<ListModel, string>
+    public class ListFormRepository : IListFormRepository
     {
         private readonly MinTra_Context db;
         public ListFormRepository(MinTra_Context _db)
@@ -19,10 +19,10 @@ namespace MinTrabajo.Datos.Repositories
             db = _db;
         }
 
-        public List<ListModel> GetListPrestadores()
+        public List<ListModel2> GetListPrestadores()
         {
-            var ListPrestadores = new List<ListModel>();
-           
+            var ListPrestadores = new List<ListModel2>();
+
             try
             {
                 SqlConnectionStringBuilder dbContext = db.DBContext();
@@ -30,21 +30,30 @@ namespace MinTrabajo.Datos.Repositories
                 {
 
                     connection.Open();
-                    //CONSULTA EN BASE DE DATOS LAS LISTAS PRESTADORES
-                    connection.Close();
-                    int i = 0;
-                    while (i < 10)
+                    using (SqlCommand cmd = new("SP_GET_LISTPRESTADOR", connection))
                     {
-                        ListPrestadores.Add(new ListModel
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        var reader = cmd.ExecuteReader();
+
+                        while (reader.Read())
                         {
-                            Id = i,
-                            Nombre = "Prestador " + i
-                        });
-                        i++;
+
+                            ListPrestadores.Add(new ListModel2
+                            {
+                                Id = reader.GetGuid(0),
+                                Nombre = reader.GetString(1),
+                            });
+                        }
+
+
                     }
+                    connection.Close();
+
 
                 }
                 return ListPrestadores;
+
+
             }
             catch (Exception)
             {
@@ -53,7 +62,7 @@ namespace MinTrabajo.Datos.Repositories
             }
         }
 
-        public List<ListModel> GetListSedes()
+        public List<ListModel> GetListSedes( int PrestadorId)
         {
             var ListSedes = new List<ListModel>();
             //string? mensajeSP = "";
@@ -64,7 +73,7 @@ namespace MinTrabajo.Datos.Repositories
                 {
 
                     connection.Open();
-                    //CONSULTA EN BASE DE DATOS LAS LISTAS SEDES 
+                    //CONSULTA EN BASE DE DATOS LAS LISTAS SEDES POR PRESTADOR
                     connection.Close();
                     int i = 0;
                     while (i < 10)

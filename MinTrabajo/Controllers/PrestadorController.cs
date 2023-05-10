@@ -3,6 +3,7 @@ using MinTrabajo.Aplicaciones;
 using MinTrabajo.Datos.Context;
 using MinTrabajo.Datos.Repositories;
 using MinTrabajo.Dominio.Model;
+using System.Runtime.InteropServices;
 
 namespace MinTrabajo.Controllers
 {
@@ -11,7 +12,7 @@ namespace MinTrabajo.Controllers
     public class PrestadorController : Controller
     {
 
-        private PrestadorService CrearServicio()
+        private PrestadorService CreateService()
         {
             MinTra_Context db = new();
             PrestadorRepository repo = new(db);
@@ -32,7 +33,7 @@ namespace MinTrabajo.Controllers
                 List<ListModel> VacantsModel = new();
                 try
                 {
-                    var servicio = CrearServicio();
+                    var servicio = CreateService();
                     VacantsModel = servicio.GetVacantByPrestadores(PrestadorId);
                 }
                 catch (Exception ex)
@@ -57,30 +58,119 @@ namespace MinTrabajo.Controllers
         [Route("GetVacantByPrestadorNoMatch")]
         public ActionResult GetVacantByPrestadorNoMatch(int PrestadorId)
         {
+
             ResponseModel response = new();
-            if (PrestadorId > 0 || PrestadorId != 0)
+            try
             {
-                List<ListModel> VacantsModel = new();
-                try
+                if (PrestadorId > 0 || PrestadorId != 0)
                 {
-                    var servicio = CrearServicio();
+                    List<ListModel> VacantsModel = new();
+
+                    var servicio = CreateService();
                     VacantsModel = servicio.GetVacantByPrestadores(PrestadorId);
+
+                    response.ObjetoRespuesta = VacantsModel;
+
                 }
-                catch (Exception ex)
+                else
                 {
-                    response.Mensaje = ex.Message;
+                    response.Mensaje = "El Valor PrestadorId no puede ser vacio o Cero";
+                    response.IsValid = false;
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                response.Mensaje = ex.Message;
+                response.IsValid = false;
+            }
+            return Ok(response);
+
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="postVacantMatch"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("PostVacantMatch")]
+        public ActionResult <ResponseModel> PostVacantMatch([FromBody] List<UpdateCriteriosByVacantModel> requestAtributte)
+        {
+            ResponseModel response = new();
+            var ListmatchByVacantModel=new List<UpdateCriteriosMatchByVacantModel>();   
+
+            try
+            {
+                foreach(var i in requestAtributte)
+                {
+                    if (i.atributtes.Count == 9)
+                    {
+                        foreach (var j in i.atributtes)
+                        {
+                            ListmatchByVacantModel.Add(new UpdateCriteriosMatchByVacantModel
+                            {
+                                VacantId = i.VacantId,
+                                atributte = j.atributte,
+                                weight = j.weight,
+                                User = j.User
+
+                            });
+                        }
+                        
+                    }
+                    else
+                    {
+                        response.Mensaje = "debe asegurarse de llevar los 9 criterios para cada vacante";
+                        response.IsValid = false;
+                        break;
+                    }
+                }
+
+
+                var service = CreateService();
+                var result = service.PostUpdateCriteriosVacant(ListmatchByVacantModel);
+                if (!result)
+                {
+                    response.Mensaje = "No se insertaron los datos correctamente";
                     response.IsValid = false;
                 }
-                response.ObjetoRespuesta = VacantsModel;
-
             }
-            else
+            catch (Exception ex)
             {
-                response.Mensaje = "El Valor PrestadorId no puede ser vacio o Cero";
+                response.Mensaje = ex.Message;
                 response.IsValid = false;
-
             }
+          
 
+            return Ok(response);
+        }
+
+        /// <summary>
+        /// obtener nombre de prestador por id de prestador
+        /// </summary>
+        /// <returns></returns>
+
+
+        [HttpGet]
+        [Route("GetNamePrestador")]
+        public ActionResult GetPrestador( Guid prestadorId)
+        {
+            ResponseModel response = new();
+            ListModel2 result = new();
+            try
+            {
+                var service = CreateService();
+                result = service.GetNamePrestador(prestadorId);
+            }
+            catch (Exception ex)
+            {
+                response.Mensaje = ex.Message;
+                response.IsValid = false;
+            }
+            response.ObjetoRespuesta = result;
             return Ok(response);
         }
 

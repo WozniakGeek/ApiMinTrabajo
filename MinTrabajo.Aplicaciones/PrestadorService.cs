@@ -11,10 +11,10 @@ namespace MinTrabajo.Aplicaciones
     public class PrestadorService
     {
 
-        private readonly IPrestadorRepository<ListModel, string> IPrestadorRepo;
+        private readonly IPrestadorRepository IPrestadorRepo;
 
 
-        public PrestadorService(IPrestadorRepository<ListModel, string> _prestadorRepo)
+        public PrestadorService(IPrestadorRepository _prestadorRepo)
         {
             IPrestadorRepo = _prestadorRepo;
         }
@@ -23,6 +23,32 @@ namespace MinTrabajo.Aplicaciones
             try
             {
                 List<ListModel> model = IPrestadorRepo.GetVacantByPrestador(PrestadorId);
+                return model;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public ListModel2 GetNamePrestador(Guid PrestadorId)
+        {
+            try
+            {
+                ListModel2 model = IPrestadorRepo.GetNamePrestadorByPrestadorId(PrestadorId);
+                return model;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool PostUpdateCriteriosVacant(List<UpdateCriteriosMatchByVacantModel> UpdateCriteriosMatchByVacan)
+        {
+            try
+            {
+                bool model = IPrestadorRepo.PostCriteriosVacant(UpdateCriteriosMatchByVacan);
                 return model;
             }
             catch (Exception)

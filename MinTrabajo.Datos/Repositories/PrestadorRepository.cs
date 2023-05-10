@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MinTrabajo.Datos.Repositories
 {
-    public class PrestadorRepository : IPrestadorRepository<ListModel, string>
+    public class PrestadorRepository : IPrestadorRepository
     {
         private readonly MinTra_Context db;
         public PrestadorRepository(MinTra_Context _db)
@@ -45,6 +45,85 @@ namespace MinTrabajo.Datos.Repositories
                 return ListVacants;
             }
 
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool PostCriteriosVacant(List<UpdateCriteriosMatchByVacantModel> UpdateAtributte)
+        {
+            try
+            {
+
+                SqlConnectionStringBuilder dbContext = db.DBContext();
+                using SqlConnection connection = new(dbContext.ConnectionString);
+                {
+
+                    foreach (var i in UpdateAtributte)
+                    {
+                        connection.Open();
+
+                        using (SqlCommand cmd = new("SP_INSERT_VACANTE_MATCH", connection))
+                        {
+
+                            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                            cmd.Parameters.Add(new SqlParameter("@vacanteId", i.VacantId));
+                            cmd.Parameters.Add(new SqlParameter("@variableId", i.atributte));
+                            cmd.Parameters.Add(new SqlParameter("@valor", i.weight));
+                            cmd.Parameters.Add(new SqlParameter("@usuarioCreacion", i.User));
+                            var reader = cmd.ExecuteReader();
+
+                            while (reader.Read())
+                            {
+
+                            }
+                        }
+                        connection.Close();
+                    }
+
+                    return true;
+
+                }
+            }
+
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
+        }
+
+        public ListModel2 GetNamePrestadorByPrestadorId(Guid PrestadorId)
+        {
+            try
+            {
+                var Prestador = new ListModel2();
+                SqlConnectionStringBuilder dbContext = db.DBContext();
+                using SqlConnection connection = new(dbContext.ConnectionString);
+                {
+
+                    connection.Open();
+                    using (SqlCommand cmd = new("SP_GET_PRESTADOR_BY_ID", connection))
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Parameters.Add(new SqlParameter("@PrestadorId", PrestadorId));
+                        var reader = cmd.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            Prestador.Id = reader.GetGuid(0);
+                            Prestador.Nombre = reader.GetString(1);
+                        }
+                    }
+                    connection.Close();
+
+
+                }
+                return Prestador;
+
+            }
             catch (Exception)
             {
 

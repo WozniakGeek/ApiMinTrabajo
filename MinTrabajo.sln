@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinTrabajo.Aplicaciones", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinTrabajo.Dominio", "MinTrabajo.Dominio\MinTrabajo.Dominio.csproj", "{C09DBBE1-F2C0-4391-B73E-1DDF731B77E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{943CEA7E-940B-48A2-ACAD-9174CEE7D399}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +33,6 @@ Global
 		{C09DBBE1-F2C0-4391-B73E-1DDF731B77E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C09DBBE1-F2C0-4391-B73E-1DDF731B77E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C09DBBE1-F2C0-4391-B73E-1DDF731B77E2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{943CEA7E-940B-48A2-ACAD-9174CEE7D399}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{943CEA7E-940B-48A2-ACAD-9174CEE7D399}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{943CEA7E-940B-48A2-ACAD-9174CEE7D399}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{943CEA7E-940B-48A2-ACAD-9174CEE7D399}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

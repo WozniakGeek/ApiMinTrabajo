@@ -28,7 +28,7 @@ namespace MinTrabajo.Controllers
         public ActionResult<ResponseModel> GetListPrestadores()
         {
             ResponseModel response = new();
-            List<ListModel> result = new();
+            List<ListModel2> result = new();
             try
             {
                 var servicio = CrearServicio();
@@ -42,22 +42,27 @@ namespace MinTrabajo.Controllers
             response.ObjetoRespuesta = result;
             return Ok(response);
         }
+        
 
         /// <summary>
         /// Obtiene la lista de las sedes para rol admin y prestador
         /// </summary>
         /// <returns></returns>
+        /// 
+
+
+
 
         [HttpGet]
-        [Route("GetListSedes")]
-        public ActionResult<ResponseModel> GetListSedes()
+        [Route("GetListSedesByPrestadorId")]
+        public ActionResult<ResponseModel> GetListSedes(int PrestadorId)
         {
             ResponseModel response = new();
             List<ListModel> result = new();
             try
             {
                 var servicio = CrearServicio();
-                result = servicio.GetAllListSedes();
+                result = servicio.GetAllListSedes(PrestadorId);
             }
             catch (Exception ex)
             {
