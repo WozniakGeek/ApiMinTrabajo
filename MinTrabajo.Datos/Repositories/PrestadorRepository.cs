@@ -130,5 +130,87 @@ namespace MinTrabajo.Datos.Repositories
                 throw;
             }
         }
+
+        public List<ListModel2> GetNamePointOfAttentionPrestadorId(Guid PrestadorId)
+        {
+            try
+            {
+                var ListPointOfAttention = new List<ListModel2>();
+                SqlConnectionStringBuilder dbContext = db.DBContext();
+                using SqlConnection connection = new(dbContext.ConnectionString);
+                {
+
+                    connection.Open();
+                    using (SqlCommand cmd = new("SP_GET_PUNTOATENCION_BY_PRESTADORID", connection))
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Parameters.Add(new SqlParameter("@PrestadorId", PrestadorId));
+                        var reader = cmd.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            ListPointOfAttention.Add(new ListModel2
+                            {
+                                Id = reader.GetGuid(0),
+                                Nombre = reader.GetString(1)
+                        });
+                           
+                        }
+                       
+                    }
+                    connection.Close();
+
+
+                }
+                return ListPointOfAttention;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<ListModel> GetCompanyPointOfAttentionId(Guid PointOfAttention)
+        {
+            try
+            {
+                var ListCompany = new List<ListModel>();
+                SqlConnectionStringBuilder dbContext = db.DBContext();
+                using SqlConnection connection = new(dbContext.ConnectionString);
+                {
+
+                    connection.Open();
+                    using (SqlCommand cmd = new("SP_GET_EMPRESAS_BY_PUNTOATENCION", connection))
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Parameters.Add(new SqlParameter("@PuntoAtencionId", PointOfAttention));
+                        var reader = cmd.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            ListCompany.Add(new ListModel
+                            {
+                                Id = reader.GetInt32(0),
+                                Nombre = reader.GetString(1)
+                            });
+
+                        }
+
+                    }
+                    connection.Close();
+
+
+                }
+                return ListCompany;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
     }
 }

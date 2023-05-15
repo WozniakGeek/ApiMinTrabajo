@@ -44,6 +44,32 @@ namespace MinTrabajo.Aplicaciones
             }
         }
 
+        public List<ListModel2> GetNamePointOfAttention(Guid PrestadorId)
+        {
+            try
+            {
+                List<ListModel2> model = IPrestadorRepo.GetNamePointOfAttentionPrestadorId(PrestadorId);
+                return model;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<ListModel> GetCompany(Guid PointOfAttention)
+        {
+            try
+            {
+                List<ListModel> model = IPrestadorRepo.GetCompanyPointOfAttentionId(PointOfAttention);
+                return model;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool PostUpdateCriteriosVacant(List<UpdateCriteriosMatchByVacantModel> UpdateCriteriosMatchByVacan)
         {
             try

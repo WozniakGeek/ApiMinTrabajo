@@ -174,6 +174,46 @@ namespace MinTrabajo.Controllers
             return Ok(response);
         }
 
+        [HttpGet]
+        [Route("GetpointOfAttention")]
+        public ActionResult GetPointOfAttention(Guid prestadorId)
+        {
+            ResponseModel response = new();
+            List<ListModel2> result = new();
+            try
+            {
+                var service = CreateService();
+                result = service.GetNamePointOfAttention(prestadorId);
+            }
+            catch (Exception ex)
+            {
+                response.Mensaje = ex.Message;
+                response.IsValid = false;
+            }
+            response.ObjetoRespuesta = result;
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("GetCompany")]
+        public ActionResult GetCompanyByPointOfAttention(Guid PointOfAttentionId)
+        {
+            ResponseModel response = new();
+            List<ListModel> result = new();
+            try
+            {
+                var service = CreateService();
+                result = service.GetCompany(PointOfAttentionId);
+            }
+            catch (Exception ex)
+            {
+                response.Mensaje = ex.Message;
+                response.IsValid = false;
+            }
+            response.ObjetoRespuesta = result;
+            return Ok(response);
+        }
+
     }
 
 }
