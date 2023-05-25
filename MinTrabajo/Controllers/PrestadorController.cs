@@ -24,60 +24,39 @@ namespace MinTrabajo.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("GetVacantByPrestadorMatch")]
-        public ActionResult GetVacantByPrestador(int PrestadorId)
-        {
-            ResponseModel response = new();
-            if (PrestadorId > 0 || PrestadorId != 0)
-            {
-                List<ListModel> VacantsModel = new();
-                try
-                {
-                    var servicio = CreateService();
-                    VacantsModel = servicio.GetVacantByPrestadores(PrestadorId);
-                }
-                catch (Exception ex)
-                {
-                    response.Mensaje = ex.Message;
-                    response.IsValid = false;
-                }
-                response.ObjetoRespuesta = VacantsModel;
-
-            }
-            else
-            {
-                response.Mensaje = "El Valor PrestadorId no puede ser vacio o Cero";
-                response.IsValid = false;
-
-            }
-
-            return Ok(response);
-        }
-
-        [HttpGet]
-        [Route("GetVacantByPrestadorNoMatch")]
-        public ActionResult GetVacantByPrestadorNoMatch(int PrestadorId)
+        [Route("GetVacants")]
+        public async Task<ActionResult> GetVacants(Guid prestadorId, Guid PointAttention, int Company)
         {
 
             ResponseModel response = new();
+            GetVacantModel getVacant = new();
+            var VacantsModel = new List<ListVacantsModel.Vacants>();
             try
             {
-                if (PrestadorId > 0 || PrestadorId != 0)
+                if (prestadorId != Guid.Empty)
                 {
-                    List<ListModel> VacantsModel = new();
-
-                    var servicio = CreateService();
-                    VacantsModel = servicio.GetVacantByPrestadores(PrestadorId);
-
-                    response.ObjetoRespuesta = VacantsModel;
+                    getVacant.PrestadorId = prestadorId;
+                    if (PointAttention != Guid.Empty)
+                    {
+                        getVacant.PointOfAttention = PointAttention;
+                        if (Company > 0)
+                        {
+                            getVacant.CompanyId = Company;
+                        }
+                        else { getVacant.CompanyId = null; }
+                    }
+                    else { getVacant.PointOfAttention = null; }
+                    var service = CreateService();
+                    VacantsModel =await service.GetVacantByPrestadores(getVacant);
 
                 }
                 else
                 {
-                    response.Mensaje = "El Valor PrestadorId no puede ser vacio o Cero";
+                    response.Mensaje = "El PrestadorId no puede ser vacio";
                     response.IsValid = false;
-
+                    return BadRequest(response);
                 }
+
 
             }
             catch (Exception ex)
@@ -85,10 +64,14 @@ namespace MinTrabajo.Controllers
                 response.Mensaje = ex.Message;
                 response.IsValid = false;
             }
-            return Ok(response);
+            //response.ObjetoRespuesta = VacantsModel;
 
 
+
+            return Ok(VacantsModel);
         }
+
+        
 
         /// <summary>
         /// 
@@ -97,14 +80,14 @@ namespace MinTrabajo.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("PostVacantMatch")]
-        public ActionResult <ResponseModel> PostVacantMatch([FromBody] List<UpdateCriteriosByVacantModel> requestAtributte)
+        public ActionResult<ResponseModel> PostVacantMatch([FromBody] List<UpdateCriteriosByVacantModel> requestAtributte)
         {
             ResponseModel response = new();
-            var ListmatchByVacantModel=new List<UpdateCriteriosMatchByVacantModel>();   
+            var ListmatchByVacantModel = new List<UpdateCriteriosMatchByVacantModel>();
 
             try
             {
-                foreach(var i in requestAtributte)
+                foreach (var i in requestAtributte)
                 {
                     if (i.atributtes.Count == 9)
                     {
@@ -119,7 +102,7 @@ namespace MinTrabajo.Controllers
 
                             });
                         }
-                        
+
                     }
                     else
                     {
@@ -143,7 +126,7 @@ namespace MinTrabajo.Controllers
                 response.Mensaje = ex.Message;
                 response.IsValid = false;
             }
-          
+
 
             return Ok(response);
         }
@@ -156,7 +139,7 @@ namespace MinTrabajo.Controllers
 
         [HttpGet]
         [Route("GetNamePrestador")]
-        public ActionResult GetPrestador( Guid prestadorId)
+        public ActionResult GetPrestador(Guid prestadorId)
         {
             ResponseModel response = new();
             ListModel2 result = new();

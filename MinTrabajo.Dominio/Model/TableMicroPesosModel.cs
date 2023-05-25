@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace MinTrabajo.Dominio.Model
 {
-    public class CriterioModel
+    public class TableMicroPesosModel
     {
+        public Guid PesoVariableId { get; set; }
+        public Guid VacanteId { get; set; }
         public int VariableId { get; set; }
-
         public string? NombreVariable { get; set; }
-        public decimal PesoDefault { get; set; }
-
+        public decimal Peso { get; set; }
+        public string? UsuarioCreacion { get; set; }
         public string? FechaCreacion { get; set; }
-
+        public string? UsuarioModificacion { get; set; }
         public string? FechaModificacion { get; set; }
-        public int NombreEstado { get; set; }
     }
 }

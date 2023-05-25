@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static MinTrabajo.Dominio.Model.ListVacantsModel;
 
 namespace MinTrabajo.Aplicaciones
 {
@@ -18,11 +19,11 @@ namespace MinTrabajo.Aplicaciones
         {
             IPrestadorRepo = _prestadorRepo;
         }
-        public List<ListModel> GetVacantByPrestadores(int PrestadorId)
+        public async Task<List<Vacants>> GetVacantByPrestadores(GetVacantModel getVacant)
         {
             try
             {
-                List<ListModel> model = IPrestadorRepo.GetVacantByPrestador(PrestadorId);
+                List<Vacants> model =await IPrestadorRepo.GetVacantByPrestador(getVacant);
                 return model;
             }
             catch (Exception)

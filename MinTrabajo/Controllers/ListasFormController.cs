@@ -11,7 +11,7 @@ namespace MinTrabajo.Controllers
     public class ListasFormController : ControllerBase
     {
     
-        private ListasFormService CrearServicio()
+        private ListasFormService CreateService()
         {
             MinTra_Context db = new();
             ListFormRepository repo = new(db);
@@ -31,7 +31,7 @@ namespace MinTrabajo.Controllers
             List<ListModel2> result = new();
             try
             {
-                var servicio = CrearServicio();
+                var servicio = CreateService();
                 result = servicio.GetAllListPrestadores();
             }
             catch (Exception ex)
@@ -53,25 +53,27 @@ namespace MinTrabajo.Controllers
 
 
 
-        [HttpGet]
-        [Route("GetListSedesByPrestadorId")]
-        public ActionResult<ResponseModel> GetListSedes(int PrestadorId)
-        {
-            ResponseModel response = new();
-            List<ListModel> result = new();
-            try
-            {
-                var servicio = CrearServicio();
-                result = servicio.GetAllListSedes(PrestadorId);
-            }
-            catch (Exception ex)
-            {
-                response.Mensaje = ex.Message;
-                response.IsValid = false;
-            }
-            response.ObjetoRespuesta = result;
-            return Ok(response);
-        }
+        //[HttpGet]
+        //[Route("GetListSedesByPrestadorId")]
+        //public ActionResult<ResponseModel> GetListSedes(int PrestadorId)
+        //{
+        //    ResponseModel response = new();
+        //    List<ListModel> result = new();
+        //    try
+        //    {
+        //        var servicio = CreateService();
+        //        result = servicio.GetAllListSedes(PrestadorId);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        response.Mensaje = ex.Message;
+        //        response.IsValid = false;
+        //    }
+        //    response.ObjetoRespuesta = result;
+        //    return Ok(response);
+        //}
+
+
         /// <summary>
         /// Obtiene la lista de los estados para rol admin y prestador
         /// </summary>
@@ -85,7 +87,7 @@ namespace MinTrabajo.Controllers
             List<ListModel> result = new();
             try
             {
-                var servicio = CrearServicio();
+                var servicio = CreateService();
                 result = servicio.GetAllListStatus();
             }
             catch (Exception ex)
@@ -105,8 +107,49 @@ namespace MinTrabajo.Controllers
             List<ListModel> result = new();
             try
             {
-                var service = CrearServicio();
+                var service = CreateService();
                 result = service.GetAllListCriterios();
+            }
+            catch (Exception ex)
+            {
+                response.Mensaje = ex.Message;
+                response.IsValid = false;
+            }
+            response.ObjetoRespuesta = result;
+            return Ok(response);
+        }
+
+        [HttpPost]
+        [Route("SetErrors")]
+        public ActionResult<ResponseModel> SetErrors([FromBody] ErrorModelSet errorModel)
+        {
+            ResponseModel response = new();
+            List<ListModel> result = new();
+            try
+            {
+                var service = CreateService();
+                result = service.SetErrors(errorModel);
+            }
+            catch (Exception ex)
+            {
+                response.Mensaje = ex.Message;
+                response.IsValid = false;
+            }
+            response.ObjetoRespuesta = result;
+            return Ok(response);
+        }
+
+
+        [HttpGet]
+        [Route("GetErrors")]
+        public ActionResult GetErrors()
+        {
+            ResponseModel response = new();
+            List<ErrorModel> result = new();
+            try
+            {
+                var service = CreateService();
+                result = service.GetErrors();
             }
             catch (Exception ex)
             {

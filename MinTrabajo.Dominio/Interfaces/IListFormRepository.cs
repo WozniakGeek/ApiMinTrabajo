@@ -13,6 +13,8 @@ namespace MinTrabajo.Dominio.Interfaces
         List<ListModel> GetListSedes(int Prestador);
         List<ListModel> GetListStatus();
         List<ListModel> GetListCriterios();
+        List<ListModel> SetErrorsDB(ErrorModelSet errorModel);
+        List<ErrorModel> GetErrorsBD();
 
 
         //TMsg PostAdminCIF(TEntityReq entityReq);

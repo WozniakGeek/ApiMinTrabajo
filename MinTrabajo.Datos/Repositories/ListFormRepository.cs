@@ -62,7 +62,7 @@ namespace MinTrabajo.Datos.Repositories
             }
         }
 
-        public List<ListModel> GetListSedes( int PrestadorId)
+        public List<ListModel> GetListSedes(int PrestadorId)
         {
             var ListSedes = new List<ListModel>();
             //string? mensajeSP = "";
@@ -114,14 +114,14 @@ namespace MinTrabajo.Datos.Repositories
 
                         while (reader.Read())
                         {
-                            
+
                             ListStatus.Add(new ListModel
                             {
                                 Id = reader.GetInt32(0),
                                 Nombre = reader.GetString(1),
                             });
                         }
-                    
+
 
                     }
                     connection.Close();
@@ -130,7 +130,7 @@ namespace MinTrabajo.Datos.Repositories
                 }
                 return ListStatus;
 
-              
+
             }
             catch (Exception)
             {
@@ -182,5 +182,87 @@ namespace MinTrabajo.Datos.Repositories
                 throw;
             }
         }
+
+        public List<ListModel> SetErrorsDB(ErrorModelSet errorModel)
+        {
+            var ListStatus = new List<ListModel>();
+            //string? mensajeSP = "";
+            try
+            {
+                SqlConnectionStringBuilder dbContext = db.DBContext();
+                using SqlConnection connection = new(dbContext.ConnectionString);
+                {
+
+                    connection.Open();
+                    using (SqlCommand cmd = new("SP_INSERT_ERROR", connection))
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Parameters.Add(new SqlParameter("Proceso", errorModel.Proccess));
+                        cmd.Parameters.Add(new SqlParameter("NombreMetodoError", errorModel.NameError));
+                        cmd.Parameters.Add(new SqlParameter("Error", errorModel.Errors));
+                        var reader = cmd.ExecuteReader();
+
+
+                    }
+                    connection.Close();
+
+
+                }
+                return ListStatus;
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<ErrorModel> GetErrorsBD()
+        {
+            var ListErrors = new List<ErrorModel>();
+            try
+            {
+                SqlConnectionStringBuilder dbContext = db.DBContext();
+                using SqlConnection connection = new(dbContext.ConnectionString);
+                {
+
+                    connection.Open();
+                    using (SqlCommand cmd = new("SP_GET_TABLE_ERROR", connection))
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        var reader = cmd.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+
+                            ListErrors.Add(new ErrorModel
+                            {
+                                Proccess = reader.GetString(0),
+                                NameError = reader.GetString(1),
+                                Errors = reader.GetString(2),
+                                DateError = reader.GetDateTimeOffset(3)
+                            });
+                        }
+
+
+                    }
+                    connection.Close();
+
+
+                }
+                return ListErrors;
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
     }
 }

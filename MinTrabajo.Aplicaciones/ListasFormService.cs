@@ -70,6 +70,33 @@ namespace MinTrabajo.Aplicaciones
                 throw;
             }
         }
+        
+
+        public List<ListModel> SetErrors(ErrorModelSet errorModel)
+        {
+            try
+            {
+                List<ListModel> model = ListFormRepo.SetErrorsDB(errorModel);
+                return model;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<ErrorModel> GetErrors()
+        {
+            try
+            {
+                List<ErrorModel> model = ListFormRepo.GetErrorsBD();
+                return model;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
     }
 }

@@ -16,7 +16,7 @@ namespace MinTrabajo.Datos.Context
                 DataSource = "mintrabajodb.database.windows.net",
                 UserID = "micrositio",
                 Password = "M1nTr4H1t55*",
-                InitialCatalog = "Motor"
+                InitialCatalog = "DB_SPE_MOTOR"
             };
             return builder;
         }
