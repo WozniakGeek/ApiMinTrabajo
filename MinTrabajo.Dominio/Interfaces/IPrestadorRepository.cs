@@ -12,8 +12,8 @@ namespace MinTrabajo.Dominio.Interfaces
     {
         Task<List<Vacants>> GetVacantByPrestador(GetVacantModel getVacant);
         ListModel2 GetNamePrestadorByPrestadorId(Guid PrestadorId);
-        List<ListModel2> GetNamePointOfAttentionPrestadorId(Guid PrestadorId);
-        List<ListModel> GetCompanyPointOfAttentionId(Guid PointOfAttention);
+        List<ListModel2> GetNamePointOfAttentionPrestadorId(Guid? PrestadorId);
+        List<ListModel> GetCompanyPointOfAttentionId(Guid? PointOfAttention);
         bool PostCriteriosVacant(List<UpdateCriteriosMatchByVacantModel> UpdateAtributte);
     }
 }

@@ -98,5 +98,18 @@ namespace MinTrabajo.Aplicaciones
             }
         }
 
+        public List<ErrorModel> GetErrorsFilter(DateTime DateStart, DateTime DateEnd)
+        {
+            try
+            {
+                List<ErrorModel> model = ListFormRepo.GetErrorsFilterBD(DateStart, DateEnd);
+                return model;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }

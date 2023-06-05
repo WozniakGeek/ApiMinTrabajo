@@ -10,7 +10,7 @@ namespace MinTrabajo.Controllers
     [ApiController]
     public class ListasFormController : ControllerBase
     {
-    
+
         private ListasFormService CreateService()
         {
             MinTra_Context db = new();
@@ -42,7 +42,7 @@ namespace MinTrabajo.Controllers
             response.ObjetoRespuesta = result;
             return Ok(response);
         }
-        
+
 
         /// <summary>
         /// Obtiene la lista de las sedes para rol admin y prestador
@@ -150,6 +150,36 @@ namespace MinTrabajo.Controllers
             {
                 var service = CreateService();
                 result = service.GetErrors();
+            }
+            catch (Exception ex)
+            {
+                response.Mensaje = ex.Message;
+                response.IsValid = false;
+            }
+            response.ObjetoRespuesta = result;
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("GetErrorsFilter")]
+        public ActionResult GetErrorsFilter(DateTime DateStart, DateTime DateEnd)
+        {
+            ResponseModel response = new();
+            List<ErrorModel> result = new();
+            try
+            {
+                DateStart = DateStart.AddHours(00).AddMinutes(00).AddSeconds(00);
+                DateEnd = DateEnd.AddHours(23).AddMinutes(59).AddSeconds(59);
+
+                DateTimeOffset DateStartOff = new DateTimeOffset(DateStart,
+                      TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time").GetUtcOffset(DateStart));
+
+                DateTimeOffset DateEndOff = new DateTimeOffset(DateEnd,
+                      TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time").GetUtcOffset(DateEnd));
+               
+
+                var service = CreateService();
+                result = service.GetErrorsFilter(DateStart, DateEnd);
             }
             catch (Exception ex)
             {

@@ -15,6 +15,7 @@ namespace MinTrabajo.Dominio.Interfaces
         List<ListModel> GetListCriterios();
         List<ListModel> SetErrorsDB(ErrorModelSet errorModel);
         List<ErrorModel> GetErrorsBD();
+        List<ErrorModel> GetErrorsFilterBD(DateTime DateStart,DateTime DateEnd);
 
 
         //TMsg PostAdminCIF(TEntityReq entityReq);

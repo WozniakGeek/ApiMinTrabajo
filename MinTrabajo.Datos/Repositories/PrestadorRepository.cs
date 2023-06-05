@@ -20,6 +20,90 @@ namespace MinTrabajo.Datos.Repositories
         {
             db = _db;
         }
+        //public async Task<List<Vacants>> GetVacantByPrestador(GetVacantModel getVacant)
+        //{
+        //    var GuidValue = new Guid();
+        //    var getVacantSPModel = new List<GetVacantSPModel>();
+        //    var listVacants = new List<Vacants>();
+        //    try
+        //    {
+        //        SqlConnectionStringBuilder dbContext = db.DBContext();
+        //        using SqlConnection connection = new(dbContext.ConnectionString);
+        //        {
+        //            connection.Open();
+        //            using (SqlCommand cmd = new("SP_GET_VACANTES", connection))
+        //            {
+        //                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+        //                cmd.Parameters.Add(new SqlParameter("@PrestadoId", getVacant.PrestadorId));
+        //                cmd.Parameters.AddWithValue("@PuntoAtencion", getVacant.PointOfAttention == null ? (object)DBNull.Value : getVacant.PointOfAttention);
+        //                cmd.Parameters.AddWithValue("@Empresa", getVacant.CompanyId == null ? (object)DBNull.Value : getVacant.CompanyId);
+        //                var reader = cmd.ExecuteReader();
+
+        //                while (reader.Read())
+        //                {
+        //                    var guidtest = reader.GetGuid(8);
+        //                    getVacantSPModel.Add(new GetVacantSPModel
+        //                    {
+        //                        IdVacant = reader.GetGuid(0),
+        //                        NameVacant = reader.GetString(1),
+        //                        Campus = reader.GetString(2),
+        //                        CampusId = reader.GetInt32(3),
+        //                        IsHidrocarburos = reader.GetBoolean(4),
+        //                        prestadorName = reader.GetString(5),
+        //                        PointAttentionName = reader.GetString(6),
+        //                        PointAttentionId = reader.GetGuid(7),
+        //                        VacanteMatchId = reader.GetGuid(8),
+        //                        WeightDefault = reader.GetString(9),
+        //                        VariableId = reader.GetInt32(10),
+        //                        NameVariable = reader.GetString(11),
+        //                        ValueVariable = reader.GetDecimal(12),
+        //                    });
+
+        //                };
+        //                var getVacantSPModelGeneral = getVacantSPModel.Where(x => x.IsHidrocarburos == false).ToList().Take(1800);//cambiar el top
+        //                var GetVacanteAndName = (from a in getVacantSPModelGeneral
+        //                                         select new { id = a.IdVacant, Name = a.NameVacant, isMatch = a.VacanteMatchId }).Distinct().ToList();
+
+
+        //                foreach (var i in GetVacanteAndName)
+        //                {
+
+        //                    listVacants.Add(new Vacants
+        //                    {
+        //                        VacanteId = i.id,
+        //                        Vacante = i.Name,
+        //                        Match = i.isMatch == GuidValue ? false : true,
+        //                        CriteriosList =
+        //                                        (from a in getVacantSPModelGeneral
+        //                                         where a.IdVacant == i.id
+        //                                         select new Criterios
+        //                                         {
+        //                                             VariableId = a.VariableId,
+        //                                             NombreVariable = a.NameVariable,
+        //                                             Peso = a.ValueVariable,
+
+        //                                         }).ToList()
+
+        //                    });
+
+        //                }
+
+
+        //            }
+        //            connection.Close();
+
+        //        }
+        //        return listVacants;
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        throw;
+        //    }
+        //}
+
+        //Optimized
+
         public async Task<List<Vacants>> GetVacantByPrestador(GetVacantModel getVacant)
         {
             var GuidValue = new Guid();
@@ -67,22 +151,14 @@ namespace MinTrabajo.Datos.Repositories
 
                         foreach (var i in GetVacanteAndName)
                         {
+                            var criteriosList = getVacantSPModelGeneral.Where(x => x.IdVacant == i.id).Select(x => new Criterios { VariableId = x.VariableId, NombreVariable = x.NameVariable, Peso = x.ValueVariable }).ToList();
 
                             listVacants.Add(new Vacants
                             {
                                 VacanteId = i.id,
                                 Vacante = i.Name,
                                 Match = i.isMatch == GuidValue ? false : true,
-                                CriteriosList =
-                                                (from a in getVacantSPModelGeneral
-                                                 where a.IdVacant == i.id
-                                                 select new Criterios
-                                                 {
-                                                     VariableId = a.VariableId,
-                                                     NombreVariable = a.NameVariable,
-                                                     Peso = a.ValueVariable,
-
-                                                 }).ToList()
+                                CriteriosList = criteriosList
 
                             });
 
@@ -146,6 +222,7 @@ namespace MinTrabajo.Datos.Repositories
                 throw;
             }
         }
+       
 
         public ListModel2 GetNamePrestadorByPrestadorId(Guid PrestadorId)
         {
@@ -183,7 +260,7 @@ namespace MinTrabajo.Datos.Repositories
             }
         }
 
-        public List<ListModel2> GetNamePointOfAttentionPrestadorId(Guid PrestadorId)
+        public List<ListModel2> GetNamePointOfAttentionPrestadorId(Guid? PrestadorId)
         {
             try
             {
@@ -224,7 +301,7 @@ namespace MinTrabajo.Datos.Repositories
             }
         }
 
-        public List<ListModel> GetCompanyPointOfAttentionId(Guid PointOfAttention)
+        public List<ListModel> GetCompanyPointOfAttentionId(Guid? PointOfAttention)
         {
             try
             {

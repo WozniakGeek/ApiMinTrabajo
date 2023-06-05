@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static MinTrabajo.Dominio.Model.RequestUpdateParameters;
 
 namespace MinTrabajo.Dominio.Interfaces
 {
@@ -12,5 +13,7 @@ namespace MinTrabajo.Dominio.Interfaces
         List<CriterioModel> GetCriterios();
 
         bool UpdateCriterios(List<RequestUpdateAtributte> atributtes);
+        bool UpdateParametersAdmin(List<parameters> parameter, string? username);
+        List<GetParameters> GetParametersAdmin();
     }
 }

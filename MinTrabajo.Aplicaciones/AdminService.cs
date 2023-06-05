@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static MinTrabajo.Dominio.Model.RequestUpdateParameters;
 
 namespace MinTrabajo.Aplicaciones
 {
@@ -37,6 +38,32 @@ namespace MinTrabajo.Aplicaciones
             try
             {
                 bool model = IAdminRepo.UpdateCriterios(atributteS);
+                return model;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        
+        public List<GetParameters> GetParameters()
+        {
+            try
+            {
+                var model = IAdminRepo.GetParametersAdmin();
+                return model;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        
+        public bool UpdateParameters(List<parameters> atributtes, string? username)
+        {
+            try
+            {
+                var model = IAdminRepo.UpdateParametersAdmin(atributtes, username);
                 return model;
             }
             catch (Exception)

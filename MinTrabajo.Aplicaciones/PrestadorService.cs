@@ -45,7 +45,7 @@ namespace MinTrabajo.Aplicaciones
             }
         }
 
-        public List<ListModel2> GetNamePointOfAttention(Guid PrestadorId)
+        public List<ListModel2> GetNamePointOfAttention(Guid? PrestadorId)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace MinTrabajo.Aplicaciones
             }
         }
 
-        public List<ListModel> GetCompany(Guid PointOfAttention)
+        public List<ListModel> GetCompany(Guid? PointOfAttention)
         {
             try
             {

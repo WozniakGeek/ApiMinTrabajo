@@ -232,6 +232,7 @@ namespace MinTrabajo.Datos.Repositories
                     using (SqlCommand cmd = new("SP_GET_TABLE_ERROR", connection))
                     {
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
                         var reader = cmd.ExecuteReader();
 
                         while (reader.Read())
@@ -257,6 +258,51 @@ namespace MinTrabajo.Datos.Repositories
 
             }
             catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<ErrorModel> GetErrorsFilterBD(DateTime DateStart, DateTime DateEnd)
+        {
+            var ListErrors = new List<ErrorModel>();
+            try
+            {
+                SqlConnectionStringBuilder dbContext = db.DBContext();
+                using SqlConnection connection = new(dbContext.ConnectionString);
+                {
+
+                    connection.Open();
+                    using (SqlCommand cmd = new("GET_ERROR_FILTER", connection))
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Parameters.Add(new SqlParameter("@FechaInicio", DateStart));
+                        cmd.Parameters.Add(new SqlParameter("@FechaFin", DateEnd));
+                        var reader = cmd.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+
+                            ListErrors.Add(new ErrorModel
+                            {
+                                Proccess = reader.GetString(0),
+                                NameError = reader.GetString(1),
+                                Errors = reader.GetString(2),
+                                DateError = reader.GetDateTimeOffset(3)
+                            });
+                        }
+
+
+                    }
+                    connection.Close();
+
+
+                }
+                return ListErrors;
+
+            }
+            catch (Exception ex)
             {
 
                 throw;

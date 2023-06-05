@@ -3,6 +3,7 @@ using MinTrabajo.Aplicaciones;
 using MinTrabajo.Datos.Context;
 using MinTrabajo.Datos.Repositories;
 using MinTrabajo.Dominio.Model;
+using System.Net;
 using System.Runtime.InteropServices;
 
 namespace MinTrabajo.Controllers
@@ -12,6 +13,10 @@ namespace MinTrabajo.Controllers
     public class PrestadorController : Controller
     {
 
+        /// <summary>
+        /// Creates a new instance of PrestadorService.
+        /// </summary>
+        /// <returns>A new instance of PrestadorService.</returns>
         private PrestadorService CreateService()
         {
             MinTra_Context db = new();
@@ -20,9 +25,13 @@ namespace MinTrabajo.Controllers
             return service;
         }
         /// <summary>
-        /// Obtiene la lista de las vacantes por prestador
+        /// Gets a list of vacant positions based on the provided PrestadorId, PointAttention and Company.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="prestadorId">The PrestadorId to search for.</param>
+        /// <param name="PointAttention">The PointAttention to search for.</param>
+        /// <param name="Company">The Company to search for.</param>
+        /// <returns>A list of vacant positions.</returns>
+
         [HttpGet]
         [Route("GetVacants")]
         public async Task<ActionResult> GetVacants(Guid prestadorId, Guid PointAttention, int Company)
@@ -47,7 +56,7 @@ namespace MinTrabajo.Controllers
                     }
                     else { getVacant.PointOfAttention = null; }
                     var service = CreateService();
-                    VacantsModel =await service.GetVacantByPrestadores(getVacant);
+                    VacantsModel = await service.GetVacantByPrestadores(getVacant);
 
                 }
                 else
@@ -66,30 +75,29 @@ namespace MinTrabajo.Controllers
             }
             //response.ObjetoRespuesta = VacantsModel;
 
-
-
             return Ok(VacantsModel);
         }
 
-        
+
+
 
         /// <summary>
-        /// 
+        /// PostVacantMatch updates the criteria for a given vacancy
         /// </summary>
-        /// <param name="postVacantMatch"></param>
-        /// <returns></returns>
+        /// <param name="requestAtributte">List of UpdateCriteriosByVacantModel</param>
+        /// <returns>ResponseModel with the result of the operation</returns>
         [HttpPost]
         [Route("PostVacantMatch")]
         public ActionResult<ResponseModel> PostVacantMatch([FromBody] List<UpdateCriteriosByVacantModel> requestAtributte)
         {
-            ResponseModel response = new();
+            var response = new ResponseModel();
             var ListmatchByVacantModel = new List<UpdateCriteriosMatchByVacantModel>();
 
             try
             {
                 foreach (var i in requestAtributte)
                 {
-                    if (i.atributtes.Count == 9)
+                    if (i.atributtes.Count == 6)
                     {
                         foreach (var j in i.atributtes)
                         {
@@ -106,7 +114,7 @@ namespace MinTrabajo.Controllers
                     }
                     else
                     {
-                        response.Mensaje = "debe asegurarse de llevar los 9 criterios para cada vacante";
+                        response.Mensaje = "Debe asegurarse de llevar los 6 criterios para cada vacante";
                         response.IsValid = false;
                         break;
                     }
@@ -130,13 +138,18 @@ namespace MinTrabajo.Controllers
 
             return Ok(response);
         }
+        
+
+
+
 
         /// <summary>
-        /// obtener nombre de prestador por id de prestador
+        /// Gets the name of the prestador.
         /// </summary>
-        /// <returns></returns>
-
-
+        /// <param name="prestadorId">The prestador identifier.</param>
+        /// <returns>
+        /// The name of the prestador.
+        /// </returns>
         [HttpGet]
         [Route("GetNamePrestador")]
         public ActionResult GetPrestador(Guid prestadorId)
@@ -157,41 +170,84 @@ namespace MinTrabajo.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Gets the point of attention for the given prestadorId.
+        /// </summary>
+        /// <param name="prestadorId">The prestador identifier.</param>
+        /// <returns>A list of ListModel2 objects.</returns>
         [HttpGet]
         [Route("GetpointOfAttention")]
-        public ActionResult GetPointOfAttention(Guid prestadorId)
+        public ActionResult GetPointOfAttention(Guid? prestadorId)
         {
-            ResponseModel response = new();
-            List<ListModel2> result = new();
+            var response = new ResponseModel();
+            var result = new List<ListModel2>();
             try
             {
-                var service = CreateService();
-                result = service.GetNamePointOfAttention(prestadorId);
+                if (prestadorId != null)
+                {
+                    var service = CreateService();
+                    result = service.GetNamePointOfAttention(prestadorId);
+                    if (result.Count == 0)
+                    {
+                        return NoContent();
+                    }
+                }
+                else
+                {
+                    response.Mensaje = "El PrestadorId no puede ser vacio";
+                    response.IsValid = false;
+                    return BadRequest(response);
+                }
             }
             catch (Exception ex)
             {
                 response.Mensaje = ex.Message;
                 response.IsValid = false;
+                return BadRequest(response);
             }
             response.ObjetoRespuesta = result;
             return Ok(response);
         }
+       
 
+
+
+        /// <summary>
+        /// Gets a list of companies associated with a given Point of Attention.
+        /// </summary>
+        /// <param name="PointOfAttentionId">The Point of Attention identifier.</param>
+        /// <returns>A list of companies associated with the given Point of Attention.</returns>
         [HttpGet]
         [Route("GetCompany")]
-        public ActionResult GetCompanyByPointOfAttention(Guid PointOfAttentionId)
+        public ActionResult GetCompanyByPointOfAttention(Guid? PointOfAttentionId)
         {
-            ResponseModel response = new();
-            List<ListModel> result = new();
+            var response = new ResponseModel();
+            var result = new List<ListModel>();
             try
             {
-                var service = CreateService();
-                result = service.GetCompany(PointOfAttentionId);
+                if (PointOfAttentionId != null)
+                {
+                    var service = CreateService();
+                    result = service.GetCompany(PointOfAttentionId);
+                    if (result.Count == 0)
+                    {
+                        return NoContent();
+                    }
+
+                }
+                else
+                {
+                    response.Mensaje = "El Punto de atencion no puede ser vacio";
+                    response.IsValid = false;
+                    return BadRequest(response);
+                }
+
             }
             catch (Exception ex)
             {
                 response.Mensaje = ex.Message;
                 response.IsValid = false;
+                return BadRequest(response);
             }
             response.ObjetoRespuesta = result;
             return Ok(response);
